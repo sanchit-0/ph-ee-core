@@ -56,7 +56,7 @@ jobs:
           command: |
             ./gradlew bootJar
             docker build -t fynarfin/ph-ee-connector-mock-payment-schema:latest .
-            if [ "$CIRCLE_BRANCH" != "master" ]; then
+            if [ "$CIRCLE_BRANCH" != "develop" ]; then
                PR_NUMBER=$(basename $CIRCLE_PULL_REQUEST)
                PR_TITLE=$(curl -sSL "https://api.github.com/repos/fynarfin/$CIRCLE_PR_REPONAME/pulls/$PR_NUMBER" | jq -r '.title')
                JIRA_STORY=$(echo $PR_TITLE | cut -d "[" -f2 | cut -d "]" -f1 | tr '[A-Z]' '[a-z]')
@@ -72,10 +72,10 @@ jobs:
       - run:
           name: Push Docker image to DockerHub
           command: |
-            if [ "$CIRCLE_BRANCH" = "master" ]; then
+            if [ "$CIRCLE_BRANCH" = "develop" ]; then
             docker push fynarfin/ph-ee-connector-mock-payment-schema:latest
             fi
-            if [ "$CIRCLE_BRANCH" != "master" ]; then
+            if [ "$CIRCLE_BRANCH" != "develop" ]; then
             PR_NUMBER=$(basename $CIRCLE_PULL_REQUEST)
             PR_TITLE=$(curl -sSL "https://api.github.com/repos/fynarfin/$CIRCLE_PR_REPONAME/pulls/$PR_NUMBER" | jq -r '.title')
             JIRA_STORY=$(echo $PR_TITLE | cut -d "[" -f2 | cut -d "]" -f1 | tr '[A-Z]' '[a-z]')
