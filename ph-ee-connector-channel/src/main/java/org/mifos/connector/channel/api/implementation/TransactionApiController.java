@@ -10,10 +10,17 @@ import org.apache.camel.Exchange;
 import org.apache.camel.ProducerTemplate;
 import org.mifos.connector.channel.api.definition.TransactionApi;
 import org.mifos.connector.channel.gsma_api.GsmaP2PResponseDto;
+import org.mifos.connector.channel.service.ValidateHeaders;
+import org.mifos.connector.channel.utils.HeaderConstants;
 import org.mifos.connector.channel.utils.Headers;
 import org.mifos.connector.channel.utils.SpringWrapperUtil;
+import org.mifos.connector.channel.validator.ChannelValidator;
+import org.mifos.connector.channel.validator.HeaderValidator;
 import org.mifos.connector.common.channel.dto.TransactionChannelRequestDTO;
+import org.mifos.connector.common.exception.ValidationException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -25,8 +32,17 @@ public class TransactionApiController implements TransactionApi {
     private ProducerTemplate producerTemplate;
 
     @Override
-    public GsmaP2PResponseDto transaction(String tenant, String correlationId, TransactionChannelRequestDTO requestBody)
+    @ValidateHeaders(requiredHeaders = { HeaderConstants.PLATFORM_TENANT_ID,
+            HeaderConstants.CLIENT_CORRELATION_ID }, validatorClass = HeaderValidator.class, validationFunction = "validateTransactionRequest")
+    public ResponseEntity<GsmaP2PResponseDto> transaction(String tenant, String correlationId, TransactionChannelRequestDTO requestBody)
             throws JsonProcessingException {
+
+        try {
+            ChannelValidator.validateTransfer(requestBody);
+        } catch (ValidationException e) {
+            throw e;
+        }
+
         Headers headers = new Headers.HeaderBuilder().addHeader("Platform-TenantId", tenant).addHeader(CLIENTCORRELATIONID, correlationId)
                 .build();
         Exchange exchange = SpringWrapperUtil.getDefaultWrappedExchange(producerTemplate.getCamelContext(), headers,
@@ -39,7 +55,8 @@ public class TransactionApiController implements TransactionApi {
         }
 
         String body = exchange.getIn().getBody(String.class);
-        return objectMapper.readValue(body, GsmaP2PResponseDto.class);
+        GsmaP2PResponseDto responseDto = objectMapper.readValue(body, GsmaP2PResponseDto.class);
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body(responseDto);
     }
 
     @Override

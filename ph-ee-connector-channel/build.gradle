@@ -10,6 +10,13 @@ plugins {
     id 'org.springframework.boot' version '2.6.2'
     id 'com.diffplug.spotless' version '6.19.0'
     id 'net.ltgt.errorprone' version '3.1.0'
+    id("org.springdoc.openapi-gradle-plugin") version "1.9.0"
+}
+
+openApi {
+    apiDocsUrl.set("http://channel.sandbox.fynarfin.io//v3/api-docs")
+    outputDir.set(file("src/main/java/docs"))
+    outputFileName.set("channel-api-swagger.json")
 }
 
 repositories {
@@ -51,7 +58,7 @@ ext {
 
 dependencies {
     implementation 'com.google.code.gson:gson:2.8.9'
-    implementation 'org.mifos:ph-ee-connector-common:1.4.1-SNAPSHOT'
+    implementation 'org.mifos:ph-ee-connector-common:1.10.0-SNAPSHOT'
     implementation 'org.apache.camel.springboot:camel-spring-boot-starter:3.12.0'
     implementation "org.springframework.boot:spring-boot-starter:$springBootVersion"
     implementation "org.springframework.boot:spring-boot-starter-web:$springBootVersion"
@@ -88,6 +95,8 @@ dependencies {
     implementation 'com.diffplug.gradle.spotless:spotless:2.4.1'
     implementation 'com.diffplug.spotless:spotless-plugin-gradle:6.17.0'
     implementation 'org.springframework.boot:spring-boot-starter-webflux:2.4.1'
+    implementation 'org.springdoc:springdoc-openapi-ui:1.5.12'
+    implementation 'org.springdoc:springdoc-openapi-data-rest:1.5.12'
 }
 
 configure(this) {

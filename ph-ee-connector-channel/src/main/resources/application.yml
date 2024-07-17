@@ -35,11 +35,17 @@ operations:
     transfers: "/transfers?page=0&size=1&"
     transactionReq: "/transactionRequests/?"
 
+security:
+  jws:
+    enable: false
+    response:
+      enable: false
+
 bpmn:
   flows:
     payment-transfer: "PayerFundTransfer-{dfspid}"
     special-payment-transfer: "SpecialPayerFundTransfer-{dfspid}"
-    transaction-request: "payee-transaction-request-{dfspid}"
+    transaction-request: "payee_transaction_request-{dfspid}"
     party-registration: "party-registration-{dfspid}"
     gsma-base-transaction: "gsma_base_transaction-{dfspid}"
     gsma-int-transfer: "gsma_int_transfer"
@@ -109,3 +115,5 @@ redis:
     enabled: true
     keyFormat: "clientCorrelationId_tenant_api"
     apiList: "/channel/transfer,/channel/collection,/channel/gsma/transaction,/channel/transactionRequest"
+
+default_headers: "user-agent,accept,postman-token,host,accept-encoding,connection,content-type,content-length,x-request-id,x-real-ip,x-forwarded-host,x-forwarded-port,x-forwarded-proto,x-forwarded-scheme,x-scheme"
