@@ -705,6 +705,17 @@ operations_web:
 
 identity:
 
+
+connector_airtel:
+  enabled: false
+  replicas: 1
+  image: "docker.io/fynarfin/ph-ee-connector-airtel"
+  ingress:
+    enabled: false
+    path: "/"
+    annotations: { }
+    backend: { }
+
 mpesa:
   enabled: false
   replicas: 1

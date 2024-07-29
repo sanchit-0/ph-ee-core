@@ -56,6 +56,10 @@ dependencies:
     version: 1.0.0
     repository: "file://./connector-mpesa"
     condition: "mpesa.enabled"
+  - name: connector_airtel
+    version: 1.0.0
+    repository: "file://./connector-airtel"
+    condition: "connector_airtel.enabled"
   - name: operations_web
     version: 1.0.0
     repository: "file://./operations-web"
