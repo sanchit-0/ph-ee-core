@@ -1,0 +1,82 @@
+camel:
+  server-port: 5000
+  springboot:
+    main-run-controller: true
+  dataformat:
+    json-jackson:
+      auto-discover-object-mapper: true
+
+zeebe:
+  client:
+    max-execution-threads: 100
+    number-of-workers: 5
+    evenly-allocated-max-jobs: "#{${zeebe.client.max-execution-threads} / ${zeebe.client.number-of-workers}}"
+    ttl: 30000
+  broker:
+    contactpoint: "localhost:26500"
+
+# endpoint configuration
+endpoints:
+  shutdown:
+    enabled: true
+
+provider:
+  telerivet:
+    enabled: true
+    id: 2
+  rapidpro:
+    enabled: false
+    id: 3
+
+operationsconfig:
+  tenantid: "Fineract-Platform-TenantId"
+  tenantidvalue : "default"
+  tenantappkey: "Fineract-Tenant-App-Key"
+  tenantappvalue: "123456543234abdkdkdkd"
+
+messagegatewayconfig:
+  host: 127.0.0.1
+  protocol: http
+  port: 9191
+velocity:
+  transactionid: transactionid
+  amount: amount
+  date: date
+  account: account
+  failure_type: failType
+  txnType: txnType
+  currency: currency
+  defaults:
+    transactionid: "123456789"
+    amount: "100"
+    account: "1234567890"
+    failure_type: "Reason not available"
+    txnType: "transfer"
+    currency: "USD"
+
+
+
+notifications:
+  local:
+    host: 0.0.0.0:5000
+  sucess:
+    enabled: false
+  failure:
+    enabled: false
+
+management:
+#  server:
+#    port: 5000
+  endpoint:
+    health:
+      enabled: true
+      probes:
+        enabled: true
+      liveness:
+        enabled: true
+      readiness:
+        enabled: true
+
+logging:
+  level:
+    root: INFO
