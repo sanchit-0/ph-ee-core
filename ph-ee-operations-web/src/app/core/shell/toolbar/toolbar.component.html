@@ -1,0 +1,33 @@
+<mat-toolbar fxLayout="row" id="mifosx-toolbar">
+
+  <div class="toolbar">
+    <div class="content">
+
+      <mifosx-language-selector class="m-l-10 language" fxHide.lt-md></mifosx-language-selector>
+
+      <span fxFlex="auto"></span>
+      <div class="username" matTooltip="{{displayEmail()}}" >{{displayUser()}}</div>
+
+      <button mat-fab class="user-icon m-r-10" [matMenuTriggerFor]="applicationMenu">
+          <fa-icon icon="user" size="lg"></fa-icon>
+      </button>
+    </div>
+  </div>
+
+</mat-toolbar>
+
+<!-- Application User Help Menu -->
+<mat-menu #applicationMenu="matMenu" [overlapTrigger]="false">
+  <button mat-menu-item [routerLink]="['/settings']">
+    <mat-icon>
+      <fa-icon icon="cog" size="lg"></fa-icon>
+    </mat-icon>
+    <span>{{'labels.menus.Settings' | translate}}</span>
+  </button>
+  <button mat-menu-item (click)="logout()">
+    <mat-icon>
+      <fa-icon icon="sign-out-alt" size="lg"></fa-icon>
+    </mat-icon>
+    <span>{{'labels.menus.Sign Out' | translate}}</span>
+  </button>
+</mat-menu>

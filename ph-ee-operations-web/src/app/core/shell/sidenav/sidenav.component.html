@@ -1,0 +1,45 @@
+<div class="sidenav" color="primary"
+  [ngClass]="{
+  'sidebar-full': !sidenavCollapsed,
+  'sidebar-compact': sidenavCollapsed
+  }">
+
+  <div class="navigation-panel" fxLayout="column">
+
+    <div class="app-sidenav">
+
+      <div class="m-t-30 m-b-1 nav-item-sep center">
+        <div class="app-brand" [routerLink]="['/home']">
+          <img src="assets/images/app_logo.png" alt="app-logo" class="app-logo">
+          <span *ngIf="!sidenavCollapsed" #logo class="app-logo-text text-muted">{{ 'APP_NAME' | translate }}</span>
+        </div>
+      </div>
+
+      <mat-nav-list>
+        <mat-list-item [routerLink]="['/dashboard']" matTooltip="Dashboard">
+          <mat-icon matListIcon >
+            <fa-icon icon="tachometer-alt" size="lg"></fa-icon>
+          </mat-icon>
+          <a *ngIf="!sidenavCollapsed" matLine #dashboard>{{ 'labels.menus.Dashboard' | translate }}</a>
+        </mat-list-item>
+        <mat-list-item [routerLink]="['/settings']" matTooltip="Settings">
+          <mat-icon matListIcon >
+            <fa-icon icon="cog" size="lg"></fa-icon>
+          </mat-icon>
+          <a *ngIf="!sidenavCollapsed" matLine #dashboard>{{ 'labels.menus.Settings' | translate }}</a>
+        </mat-list-item>
+      </mat-nav-list>
+
+      <div class="sidenav-collapse">
+        <button mat-fab *ngIf="!sidenavCollapsed" matTooltip="Close" (click)="sideNavCollapsed(true)">
+          <fa-icon icon="arrow-left" size="lg"></fa-icon>
+        </button>
+        <button mat-fab *ngIf="sidenavCollapsed" matTooltip="Open" (click)="sideNavCollapsed(false)">
+          <fa-icon icon="arrow-right" size="lg"></fa-icon>
+        </button>
+      </div>
+    </div>
+
+  </div>
+
+</div>

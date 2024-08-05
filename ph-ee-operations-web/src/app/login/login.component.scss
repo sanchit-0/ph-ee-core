@@ -1,0 +1,31 @@
+@import 'theme/theme';
+
+.main-container {
+  box-shadow: 1px 1px 50px #000;
+  height: 100vh;
+  min-height: 94%;
+  min-width: 94%;
+  margin: auto;
+  flex: none;
+}
+
+.login-container {
+  overflow: auto;
+  margin: auto;
+
+  .img-container {
+    max-width: 18rem;
+  }
+}
+
+.right-container {
+  background-color: $primary;
+  border-radius: 15px;
+  margin: 20px;
+}
+
+.title {
+  margin: auto;
+  font-size: xx-large;
+  color: $white;
+}
