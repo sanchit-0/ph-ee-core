@@ -26,5 +26,4 @@ subprojects {
         useJUnitPlatform()
     }
 }
-task bootRun() {
-}
+
