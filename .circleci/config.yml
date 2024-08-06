@@ -23,6 +23,7 @@ jobs:
       TERM: dumb
     steps:
       - checkout
+      - run: git clone https://github.com/fynarfin/ph-ee-env-labs
       - run: rm -f ph-ee-env-labs/helm/ph-ee-g2p-sandbox-ci/Chart.lock ph-ee-env-labs/helm/ph-ee-g2p-sandbox-ci/requirements.lock ph-ee-env-labs/helm/ph-ee-g2p-sandbox-ci/charts/*
       - helm/install-helm-client:
           version: "v3.8.2"
@@ -244,7 +245,7 @@ jobs:
         default: "minikube"
         type: string
       service-file-path:
-        default: https://raw.githubusercontent.com/fynarfin/ph-ee-core/ph-ee-env-labs/develop/.circleci/services.txt
+        default: https://raw.githubusercontent.com/fynarfin/ph-ee-env-labs/develop/.circleci/services.txt
         type: string
       chart-base-url:
         default: https://fynarfin.io/images/fynarfin
