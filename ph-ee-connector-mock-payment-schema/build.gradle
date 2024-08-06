@@ -332,5 +332,4 @@ openApi {
     outputDir.set(file("src/main/java/docs"))
     outputFileName.set("swagger.yaml")
 }
-task bootRun() {
-}
+
