@@ -1,6 +1,6 @@
 buildscript {
     ext {
-        springBootVersion = '2.5.6'
+        springBootVersion = '2.6.2'
     }
 
     repositories {
@@ -86,6 +86,4 @@ dependencies {
     }
 
 }
-wrapper {
-    gradleVersion = '7.3'
-}
+
