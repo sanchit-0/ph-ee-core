@@ -1603,13 +1603,6 @@ workflows:
             - AWS
             - Helm
             - slack
-      - build-g2p-sandbox-ci-chart:
-          requires:
-            - build-and-host-g2p-sandbox
-          context:
-            - AWS
-            - Helm
-            - slack
       - minikube-run-helm-upgrade-and-helm-test:
           context:
             - AWS
@@ -1617,5 +1610,5 @@ workflows:
             - slack
             - Ngrok
           requires:
-            - build-g2p-sandbox-ci-chart
+            - build-and-host-g2p-sandbox
 
