@@ -1,6 +1,5 @@
 include 'ph-ee-bulk-processor', 'ph-ee-connector-channel', 'message-gateway',
-  'ph-ee-importer-es', 'ph-ee-importer-rdbms', 'ph-ee-vouchers', 'ph-ee-identity-account-mapper' ,
-        'ph-ee-connector-mock-payment-schema','ph-ee-integration-test',
+  'ph-ee-importer-es', 'ph-ee-importer-rdbms', 'ph-ee-vouchers', 'ph-ee-integration-test',
  'ph-ee-connector-common', 'ph-ee-operations-app', 'ph-ee-operations-web', 'ph-ee-notifications'
 
 gradle.ext{
