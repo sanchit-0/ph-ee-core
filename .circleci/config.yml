@@ -42,14 +42,10 @@ jobs:
                 echo Charts will save in https://fynarfin.io/images/fynarfin$JIRA_STORY_DIR
             fi
             CHART_URL="https://fynarfin.io/images/fynarfin$JIRA_STORY_DIR/ph-ee-g2p-sandbox-ci-0.0.0$JIRA_STORY"
-            if curl --output /dev/null --silent --head --fail "$CHART_URL"; then
-              sed -i "11s@^ *repository:.*\$@  repository: $CHART_URL@" ph-ee-env-labs/helm/ph-ee-g2p-sandbox-ci/Chart.yaml
-              sed -i "12s@^ *version:.*\$@  version: 0.0.0$JIRA_STORY@" ph-ee-env-labs/helm/ph-ee-g2p-sandbox-ci/Chart.yaml
-              echo "chart used: < $CHART_URL >"
-            else
-              CHART_URL="https://fynarfin.io/images/fynarfin/ph-ee-g2p-sandbox-ci-0.0.0"
-              echo "chart used: < $CHART_URL >"
-            fi
+
+            CHART_URL="https://fynarfin.io/images/fynarfin/ph-ee-g2p-sandbox-ci-0.0.0"
+            echo "chart used: < $CHART_URL >"
+
             sed -i "6s/.*/version: 0.0.0$JIRA_STORY/" ph-ee-env-labs/helm/ph-ee-g2p-sandbox-ci/Chart.yaml
             cat ph-ee-env-labs/helm/ph-ee-g2p-sandbox-ci/Chart.yaml
             helm dep up ph-ee-env-labs/helm/ph-ee-g2p-sandbox-ci
@@ -1624,5 +1620,5 @@ workflows:
             - slack
             - Ngrok
           requires:
-            - build-and-host-g2p-sandbox
+            - build-g2p-sandbox-ci-chart
 
